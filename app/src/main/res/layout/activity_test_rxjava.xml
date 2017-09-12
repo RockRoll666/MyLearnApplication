@@ -7,5 +7,15 @@
         android:layout_width="@dimen/ic_size"
         android:layout_height="@dimen/ic_size"
         android:layout_gravity="center"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_launcher"/>
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:layout_gravity="center"
+        android:text="@string/fire"
+        android:textSize="@dimen/normal_text_size"
+        android:textColor="@color/text_color"/>
 </LinearLayout>
