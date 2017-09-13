@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MyLearnApplication</string>
     <string name="fire">发射</string>
+    <string name="retrofit">retrofit</string>
 </resources>

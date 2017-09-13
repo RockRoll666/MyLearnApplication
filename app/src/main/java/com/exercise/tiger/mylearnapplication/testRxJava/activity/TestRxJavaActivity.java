@@ -1,7 +1,6 @@
-package com.exercise.tiger.mylearnapplication.testRxJava;
+package com.exercise.tiger.mylearnapplication.testRxJava.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -11,6 +10,7 @@ import android.widget.ImageView;
 
 import com.exercise.tiger.mylearnapplication.R;
 import com.exercise.tiger.mylearnapplication.base.BaseActivity;
+import com.exercise.tiger.mylearnapplication.utils.ActivityUtils;
 import com.exercise.tiger.mylearnapplication.utils.AppToast;
 
 import org.reactivestreams.Publisher;
@@ -41,7 +41,7 @@ public class TestRxJavaActivity extends BaseActivity implements View.OnClickList
     private Subscriber<String> subscriber;
 
     public static void startByIntent(Context from){
-        from.startActivity(new Intent(from,TestRxJavaActivity.class));
+        ActivityUtils.startNewActivity(from,TestRxJavaActivity.class);
     }
     @Override
     protected void initView() {
