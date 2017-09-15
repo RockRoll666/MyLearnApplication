@@ -12,7 +12,13 @@ import com.exercise.tiger.mylearnapplication.network.RetrofitRequestServiceFacto
 import com.exercise.tiger.mylearnapplication.testRetrofit.bean.AddrsBean;
 import com.exercise.tiger.mylearnapplication.testRetrofit.bean.QueryDouBanMovieTopResult;
 import com.exercise.tiger.mylearnapplication.utils.ActivityUtils;
+import com.exercise.tiger.mylearnapplication.utils.AppToast;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,6 +71,38 @@ public class TestRtrofitActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
+    private void getLocationWithRx(){
+        Retrofit retrofit = RetrofitRequestServiceFactory.getInstance().getNewRetrofit();
+        RetrofitRequestServiceFactory.GetLocationServiceWithRx serviceWithRx = retrofit.create(RetrofitRequestServiceFactory.GetLocationServiceWithRx.class);
+        serviceWithRx.getLocation().subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<AddrsBean>() {
+                    private Disposable d;
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                     this.d = d;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull AddrsBean addrsBean) {
+                        AppToast.showShortText(TestRtrofitActivity.this,addrsBean.getLat() + "");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        e.printStackTrace();
+                        AppToast.showShortText(TestRtrofitActivity.this,e.toString());
+                        d.dispose();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        d.dispose();
+                    }
+                });
+    }
+
     private void getDouBanTop250(int start,int count){
         Retrofit retrofit = RetrofitRequestServiceFactory.getInstance().getNewRetrofit();
         RetrofitRequestServiceFactory.GetDouBanMovieTop250 service = retrofit.create(RetrofitRequestServiceFactory.GetDouBanMovieTop250.class);
@@ -82,11 +120,43 @@ public class TestRtrofitActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
+    private void getDouBanTop250WithRx(){
+        Retrofit retrofit = RetrofitRequestServiceFactory.getInstance().getNewRetrofit();
+        RetrofitRequestServiceFactory.GetDouBanMovieTop250WithRx service = retrofit.create(RetrofitRequestServiceFactory.GetDouBanMovieTop250WithRx.class);
+        service.getDouBanMovieTop250("movie",25,1)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<QueryDouBanMovieTopResult>() {
+                    private Disposable d;
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        this.d = d;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull QueryDouBanMovieTopResult queryDouBanMovieTopResult) {
+                        AppToast.showShortText(TestRtrofitActivity.this,queryDouBanMovieTopResult.getTitle());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        e.printStackTrace();
+                        d.dispose();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        d.dispose();
+                    }
+                });
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_test:
-                getDouBanTop250(25,2);
+                getDouBanTop250WithRx();
                 break;
         }
     }
