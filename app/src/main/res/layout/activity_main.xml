@@ -15,5 +15,4 @@
         android:id="@+id/btn_goto_retrofit_test"
         style="@style/NormalBtnTest"
         android:text="@string/retrofit"/>
-
 </LinearLayout>

@@ -29,9 +29,9 @@ import retrofit2.Retrofit;
  * Created by hzj on 2017/9/13.
  */
 
-public class TestRtrofitActivity extends BaseActivity implements View.OnClickListener{
+public class TestRetrofitActivity extends BaseActivity implements View.OnClickListener{
     public static void startActivityByIntent(Context from){
-        ActivityUtils.startNewActivity(from,TestRtrofitActivity.class);
+        ActivityUtils.startNewActivity(from,TestRetrofitActivity.class);
     }
     @Override
     protected void initView() {
@@ -86,13 +86,13 @@ public class TestRtrofitActivity extends BaseActivity implements View.OnClickLis
 
                     @Override
                     public void onNext(@NonNull AddrsBean addrsBean) {
-                        AppToast.showShortText(TestRtrofitActivity.this,addrsBean.getLat() + "");
+                        AppToast.showShortText(TestRetrofitActivity.this,addrsBean.getLat() + "");
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         e.printStackTrace();
-                        AppToast.showShortText(TestRtrofitActivity.this,e.toString());
+                        AppToast.showShortText(TestRetrofitActivity.this,e.toString());
                         d.dispose();
                     }
 
@@ -136,7 +136,7 @@ public class TestRtrofitActivity extends BaseActivity implements View.OnClickLis
 
                     @Override
                     public void onNext(@NonNull QueryDouBanMovieTopResult queryDouBanMovieTopResult) {
-                        AppToast.showShortText(TestRtrofitActivity.this,queryDouBanMovieTopResult.getTitle());
+                        AppToast.showShortText(TestRetrofitActivity.this,queryDouBanMovieTopResult.getTitle());
                     }
 
                     @Override

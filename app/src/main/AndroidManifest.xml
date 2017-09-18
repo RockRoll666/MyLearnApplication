@@ -25,6 +25,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".testRxJava.activity.TestRxJavaActivity"/>
-        <activity android:name=".testRetrofit.activity.TestRtrofitActivity"/>
+        <activity android:name=".testRetrofit.activity.TestRetrofitActivity"/>
     </application>
 </manifest>

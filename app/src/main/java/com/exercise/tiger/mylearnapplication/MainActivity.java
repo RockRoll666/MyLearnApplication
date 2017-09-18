@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.exercise.tiger.mylearnapplication.testRetrofit.activity.TestRtrofitActivity;
+import com.exercise.tiger.mylearnapplication.testRetrofit.activity.TestRetrofitActivity;
 import com.exercise.tiger.mylearnapplication.utils.AppToast;
 import com.exercise.tiger.mylearnapplication.utils.FormatUtils;
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 AppToast.showShortText(this, FormatUtils.decodeFromUnicode("\\u5341\\u4e8c\\u6012\\u6c49"));
                 break;
             case R.id.btn_goto_retrofit_test:
-                TestRtrofitActivity.startActivityByIntent(this);
+                TestRetrofitActivity.startActivityByIntent(this);
                 break;
             default:
                 break;
