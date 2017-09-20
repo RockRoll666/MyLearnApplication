@@ -13,6 +13,10 @@
         android:text="Hello World!" />
     <Button
         android:id="@+id/btn_goto_retrofit_test"
-        style="@style/NormalBtnTest"
+        style="@style/NormalBtnStyle"
         android:text="@string/retrofit"/>
+    <Button
+        android:id="@+id/btn_goto_rv_test"
+        style="@style/NormalBtnStyle"
+        android:text="@string/rv"/>
 </LinearLayout>

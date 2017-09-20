@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.exercise.tiger.mylearnapplication.testRetrofit.activity.TestRetrofitActivity;
+import com.exercise.tiger.mylearnapplication.testRetrofit.activity.TestRvWithRetrofitActivity;
 import com.exercise.tiger.mylearnapplication.utils.AppToast;
 import com.exercise.tiger.mylearnapplication.utils.FormatUtils;
 
@@ -18,8 +19,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         TextView tv = (TextView) findViewById(R.id.tv_clicked);
         tv.setOnClickListener(this);
-        Button btn = (Button) findViewById(R.id.btn_goto_retrofit_test);
-        btn.setOnClickListener(this);
+        Button retrofitBtn = (Button) findViewById(R.id.btn_goto_retrofit_test);
+        retrofitBtn.setOnClickListener(this);
+        Button rvBtn = (Button) findViewById(R.id.btn_goto_rv_test);
+        rvBtn.setOnClickListener(this);
     }
 
     @Override
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_goto_retrofit_test:
                 TestRetrofitActivity.startActivityByIntent(this);
+                break;
+            case R.id.btn_goto_rv_test:
+                TestRvWithRetrofitActivity.startActivityByIntent(this);
                 break;
             default:
                 break;

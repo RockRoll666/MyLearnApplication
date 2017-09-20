@@ -26,5 +26,6 @@
         </activity>
         <activity android:name=".testRxJava.activity.TestRxJavaActivity"/>
         <activity android:name=".testRetrofit.activity.TestRetrofitActivity"/>
+        <activity android:name=".testRetrofit.activity.TestRvWithRetrofitActivity"/>
     </application>
 </manifest>

@@ -9,10 +9,27 @@
         <item name="android:activityCloseEnterAnimation">@color/colorAccent</item>
     </style>
 
-    <style name="NormalBtnTest">
+    <style name="NormalBtnStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/normal_text_size</item>
         <item name="android:textColor">@color/text_color</item>
+    </style>
+    <style name="NormalTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+    <!-- 对话框样式-->
+    <style name="app_dialog" parent="android:Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.4</item>
     </style>
 </resources>

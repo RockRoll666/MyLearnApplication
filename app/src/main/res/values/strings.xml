@@ -2,4 +2,8 @@
     <string name="app_name">MyLearnApplication</string>
     <string name="fire">发射</string>
     <string name="retrofit">retrofit</string>
+    <string name="rv">rv</string>
+    <string name="loading">加载中</string>
+    <string name="load_all">已加载全部</string>
+    <string name="load_fail">加载失败</string>
 </resources>

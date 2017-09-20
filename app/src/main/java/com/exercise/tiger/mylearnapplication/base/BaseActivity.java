@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
+import com.exercise.tiger.mylearnapplication.customview.CustomSelectDialog;
+import com.exercise.tiger.mylearnapplication.utils.DialogUtil;
+
 /**
  * fragmentactivity基类
  * Created by hzj on 2017/9/11.
  */
 
 public abstract class BaseActivity extends FragmentActivity {
+    protected CustomSelectDialog loadingDialog;
     protected abstract void initView();
 
     /**
@@ -65,4 +69,16 @@ public abstract class BaseActivity extends FragmentActivity {
      * 从intent中初始化界面数据
      */
     protected abstract void getDataFromIntent(Bundle savedInstanceState);
+
+    protected void startLoading(){
+        if (null == loadingDialog || !loadingDialog.isShowing()){
+            loadingDialog = DialogUtil.showLoadingDialog(this);
+        }
+    }
+
+    protected void finishLoading(){
+        if (null != loadingDialog){
+            loadingDialog.dismiss();
+        }
+    }
 }
