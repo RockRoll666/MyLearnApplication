@@ -168,10 +168,27 @@ public class TestRxJavaActivity extends BaseActivity implements View.OnClickList
         }, BackpressureStrategy.BUFFER)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<String>() {
+                .subscribe(new Subscriber<String>() {
+
                     @Override
-                    public void accept(String s) throws Exception {
-                        Log.d("testReactAction",s);
+                    public void onSubscribe(Subscription s) {
+                        s.request(2);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull String s) {
+                        int i = 1/0;
+                        AppToast.showShortText(TestRxJavaActivity.this,s);
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                        AppToast.showShortText(TestRxJavaActivity.this,"onComplete");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        AppToast.showShortText(TestRxJavaActivity.this,"cusOnError");
                     }
                 });
     }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.exercise.tiger.mylearnapplication.testRetrofit.activity.TestRetrofitActivity;
 import com.exercise.tiger.mylearnapplication.testRetrofit.activity.TestRvWithRetrofitActivity;
+import com.exercise.tiger.mylearnapplication.testRxJava.activity.TestRxJavaActivity;
 import com.exercise.tiger.mylearnapplication.utils.AppToast;
 import com.exercise.tiger.mylearnapplication.utils.FormatUtils;
 
@@ -29,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_clicked:
-//                TestRxJavaActivity.startByIntent(this);
-                AppToast.showShortText(this, FormatUtils.decodeFromUnicode("\\u5341\\u4e8c\\u6012\\u6c49"));
+                TestRxJavaActivity.startByIntent(this);
+//                AppToast.showShortText(this, FormatUtils.decodeFromUnicode("\\u5341\\u4e8c\\u6012\\u6c49"));
                 break;
             case R.id.btn_goto_retrofit_test:
                 TestRetrofitActivity.startActivityByIntent(this);

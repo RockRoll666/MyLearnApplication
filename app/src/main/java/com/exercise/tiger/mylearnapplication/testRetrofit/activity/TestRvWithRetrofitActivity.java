@@ -16,14 +16,19 @@ import com.exercise.tiger.mylearnapplication.testRetrofit.bean.QueryDouBanMovieT
 import com.exercise.tiger.mylearnapplication.utils.ActivityUtils;
 import com.exercise.tiger.mylearnapplication.utils.AppToast;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
@@ -95,8 +100,8 @@ public class TestRvWithRetrofitActivity extends BaseActivity {
                             index = index + pageSize;
                         }
                         if (queryDouBanMovieTopResult.getSubjects().size() > 0){
-                            movieBriefs.addAll(queryDouBanMovieTopResult.getSubjects());
-                            adapter.setmData(movieBriefs);
+//                            showAllData(queryDouBanMovieTopResult);
+                            showSingularData(queryDouBanMovieTopResult);
                         }else {
                             AppToast.showShortText(TestRvWithRetrofitActivity.this,R.string.load_all);
                         }
@@ -113,5 +118,55 @@ public class TestRvWithRetrofitActivity extends BaseActivity {
                         finishLoading();
                     }
                 });
+    }
+
+    private void showAllData(QueryDouBanMovieTopResult queryDouBanMovieTopResult){
+        movieBriefs.addAll(queryDouBanMovieTopResult.getSubjects());
+        adapter.setmData(movieBriefs);
+    }
+    private void showSingularData(final QueryDouBanMovieTopResult queryDouBanMovieTopResult){
+
+        Flowable.just(queryDouBanMovieTopResult.getSubjects())
+                .subscribeOn(Schedulers.io())
+                .map(new Function<List<MovieBrief>, List<MovieBrief>>() {
+
+                    @Override
+                    public List<MovieBrief> apply(@NonNull List<MovieBrief> movieBriefs) throws Exception {
+                        removeSingular(movieBriefs);
+                        return movieBriefs;
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<MovieBrief>>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(1);
+                    }
+
+                    @Override
+                    public void onNext(List<MovieBrief> movieBriefs) {
+                        TestRvWithRetrofitActivity.this.movieBriefs.addAll(movieBriefs);
+                        adapter.setmData(TestRvWithRetrofitActivity.this.movieBriefs);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void removeSingular(List<MovieBrief> movieBriefs){
+        boolean needShow = true;
+        Iterator<MovieBrief> iterator = movieBriefs.iterator();
+        while (iterator.hasNext()){
+            iterator.next();
+            if (!needShow) iterator.remove();
+            needShow = !needShow;
+        }
     }
 }
