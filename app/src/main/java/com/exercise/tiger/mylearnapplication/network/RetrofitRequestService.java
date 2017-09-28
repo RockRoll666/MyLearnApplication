@@ -22,41 +22,8 @@ import retrofit2.http.Query;
  * Created by hzj on 2017/9/13.
  */
 
-public class RetrofitRequestServiceFactory {
+public class RetrofitRequestService {
 
-    private final Gson mGsonDateFormat;
-
-    private static class SingletonHolder{
-        private static final RetrofitRequestServiceFactory INSTANCE = new RetrofitRequestServiceFactory();
-    }
-
-
-    public static RetrofitRequestServiceFactory getInstance(){
-        return SingletonHolder.INSTANCE;
-    }
-
-    public RetrofitRequestServiceFactory(){
-        mGsonDateFormat = new GsonBuilder()
-                .setDateFormat(Constants.DATE_FORMAT_PATTERN)
-                .create();
-    }
-
-    public Retrofit getNewRetrofit(){
-        //声明日志类
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        //设定日志级别
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        //自定义OkHttpClient
-        OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
-        //添加拦截器
-        okHttpClient.addInterceptor(httpLoggingInterceptor);
-        return new Retrofit.Builder()
-                .baseUrl(Constants.HTTP_URL)
-                .addConverterFactory(GsonConverterFactory.create(mGsonDateFormat))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient.build())
-                .build();
-    }
     public interface GetLocationService {
         @GET("geocoding")
         Call<AddrsBean> getLocation();

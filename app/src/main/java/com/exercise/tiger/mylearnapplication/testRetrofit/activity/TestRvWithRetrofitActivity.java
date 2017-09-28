@@ -9,7 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import com.exercise.tiger.mylearnapplication.R;
 import com.exercise.tiger.mylearnapplication.base.BaseActivity;
 import com.exercise.tiger.mylearnapplication.customview.PullUpLoadMoreListener;
-import com.exercise.tiger.mylearnapplication.network.RetrofitRequestServiceFactory;
+import com.exercise.tiger.mylearnapplication.network.RetrofitFactory;
+import com.exercise.tiger.mylearnapplication.network.RetrofitRequestService;
 import com.exercise.tiger.mylearnapplication.testRetrofit.TestRetrofitAdapter;
 import com.exercise.tiger.mylearnapplication.testRetrofit.bean.MovieBrief;
 import com.exercise.tiger.mylearnapplication.testRetrofit.bean.QueryDouBanMovieTopResult;
@@ -81,8 +82,8 @@ public class TestRvWithRetrofitActivity extends BaseActivity {
 
     private void getDouBanTop250(){
         startLoading();
-        Retrofit retrofit = RetrofitRequestServiceFactory.getInstance().getNewRetrofit();
-        RetrofitRequestServiceFactory.GetDouBanMovieTop250WithRx service = retrofit.create(RetrofitRequestServiceFactory.GetDouBanMovieTop250WithRx.class);
+        Retrofit retrofit = RetrofitFactory.getRetrofit();
+        RetrofitRequestService.GetDouBanMovieTop250WithRx service = retrofit.create(RetrofitRequestService.GetDouBanMovieTop250WithRx.class);
         service.getDouBanMovieTop250("movie",index,pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

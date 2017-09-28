@@ -8,7 +8,8 @@ import android.widget.Button;
 
 import com.exercise.tiger.mylearnapplication.R;
 import com.exercise.tiger.mylearnapplication.base.BaseActivity;
-import com.exercise.tiger.mylearnapplication.network.RetrofitRequestServiceFactory;
+import com.exercise.tiger.mylearnapplication.network.RetrofitFactory;
+import com.exercise.tiger.mylearnapplication.network.RetrofitRequestService;
 import com.exercise.tiger.mylearnapplication.testRetrofit.bean.AddrsBean;
 import com.exercise.tiger.mylearnapplication.testRetrofit.bean.QueryDouBanMovieTopResult;
 import com.exercise.tiger.mylearnapplication.utils.ActivityUtils;
@@ -55,8 +56,8 @@ public class TestRetrofitActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void getLocationRequest(){
-        Retrofit retrofit = RetrofitRequestServiceFactory.getInstance().getNewRetrofit();
-        RetrofitRequestServiceFactory.GetLocationService service = retrofit.create(RetrofitRequestServiceFactory.GetLocationService.class);
+        Retrofit retrofit = RetrofitFactory.getRetrofit();
+        RetrofitRequestService.GetLocationService service = retrofit.create(RetrofitRequestService.GetLocationService.class);
         Call<AddrsBean> call = service.getLocation();
         call.enqueue(new Callback<AddrsBean>() {
             @Override
@@ -72,8 +73,8 @@ public class TestRetrofitActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void getLocationWithRx(){
-        Retrofit retrofit = RetrofitRequestServiceFactory.getInstance().getNewRetrofit();
-        RetrofitRequestServiceFactory.GetLocationServiceWithRx serviceWithRx = retrofit.create(RetrofitRequestServiceFactory.GetLocationServiceWithRx.class);
+        Retrofit retrofit = RetrofitFactory.getRetrofit();
+        RetrofitRequestService.GetLocationServiceWithRx serviceWithRx = retrofit.create(RetrofitRequestService.GetLocationServiceWithRx.class);
         serviceWithRx.getLocation().subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -104,8 +105,8 @@ public class TestRetrofitActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void getDouBanTop250(int start,int count){
-        Retrofit retrofit = RetrofitRequestServiceFactory.getInstance().getNewRetrofit();
-        RetrofitRequestServiceFactory.GetDouBanMovieTop250 service = retrofit.create(RetrofitRequestServiceFactory.GetDouBanMovieTop250.class);
+        Retrofit retrofit = RetrofitFactory.getRetrofit();
+        RetrofitRequestService.GetDouBanMovieTop250 service = retrofit.create(RetrofitRequestService.GetDouBanMovieTop250.class);
         Call<QueryDouBanMovieTopResult> call = service.getDouBanMovieTop250(start,count);
         call.enqueue(new Callback<QueryDouBanMovieTopResult>() {
             @Override
@@ -121,8 +122,8 @@ public class TestRetrofitActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void getDouBanTop250WithRx(){
-        Retrofit retrofit = RetrofitRequestServiceFactory.getInstance().getNewRetrofit();
-        RetrofitRequestServiceFactory.GetDouBanMovieTop250WithRx service = retrofit.create(RetrofitRequestServiceFactory.GetDouBanMovieTop250WithRx.class);
+        Retrofit retrofit = RetrofitFactory.getRetrofit();
+        RetrofitRequestService.GetDouBanMovieTop250WithRx service = retrofit.create(RetrofitRequestService.GetDouBanMovieTop250WithRx.class);
         service.getDouBanMovieTop250("movie",25,1)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
