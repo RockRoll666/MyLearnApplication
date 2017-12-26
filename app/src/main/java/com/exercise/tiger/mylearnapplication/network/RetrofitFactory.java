@@ -1,8 +1,5 @@
 package com.exercise.tiger.mylearnapplication.network;
 
-import android.app.Application;
-import android.content.Context;
-
 import com.exercise.tiger.mylearnapplication.BuildConfig;
 import com.exercise.tiger.mylearnapplication.base.MyApplication;
 import com.exercise.tiger.mylearnapplication.utils.Constants;

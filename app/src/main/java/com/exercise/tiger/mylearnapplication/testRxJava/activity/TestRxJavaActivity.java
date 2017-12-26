@@ -1,6 +1,7 @@
 package com.exercise.tiger.mylearnapplication.testRxJava.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -198,6 +199,7 @@ public class TestRxJavaActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()){
             case R.id.btn_test:
                 testReactAction();
+                startActivity(new Intent("123123"));
                 break;
             default:
                 break;
