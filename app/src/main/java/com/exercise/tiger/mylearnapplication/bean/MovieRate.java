@@ -1,4 +1,4 @@
-package com.exercise.tiger.mylearnapplication.testRetrofit.bean;
+package com.exercise.tiger.mylearnapplication.bean;
 
 /**
  * 电影评级

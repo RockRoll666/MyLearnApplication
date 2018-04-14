@@ -1,4 +1,4 @@
-package com.exercise.tiger.mylearnapplication.testRxJava.activity;
+package com.exercise.tiger.mylearnapplication.activity;
 
 import android.content.Context;
 import android.content.Intent;

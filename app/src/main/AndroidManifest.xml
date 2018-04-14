@@ -26,8 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".testRxJava.activity.TestRxJavaActivity"/>
-        <activity android:name=".testRetrofit.activity.TestRetrofitActivity"/>
-        <activity android:name=".testRetrofit.activity.TestRvWithRetrofitActivity"/>
+        <activity android:name=".activity.TestRxJavaActivity"/>
+        <activity android:name=".activity.TestRetrofitActivity"/>
+        <activity android:name=".activity.TestRvWithRetrofitActivity"/>
+        <activity android:name=".activity.TestGlideActivity"/>
+        <activity android:name=".activity.TestLargeImageActivity"/>
+        <activity android:name=".activity.TestScrollImageActivity"/>
     </application>
 </manifest>

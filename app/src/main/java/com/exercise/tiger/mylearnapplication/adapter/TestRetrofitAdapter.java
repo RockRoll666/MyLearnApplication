@@ -1,4 +1,4 @@
-package com.exercise.tiger.mylearnapplication.testRetrofit;
+package com.exercise.tiger.mylearnapplication.adapter;
 
 import android.app.Activity;
 import android.widget.ImageView;
@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.exercise.tiger.mylearnapplication.R;
 import com.exercise.tiger.mylearnapplication.base.BaseRecycleViewAdapter;
 import com.exercise.tiger.mylearnapplication.base.BaseRecycleViewHolder;
-import com.exercise.tiger.mylearnapplication.testRetrofit.bean.MovieBrief;
+import com.exercise.tiger.mylearnapplication.bean.MovieBrief;
 
 import java.util.List;
 

@@ -1,16 +1,24 @@
 package com.exercise.tiger.mylearnapplication;
 
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.exercise.tiger.mylearnapplication.testRetrofit.activity.TestRetrofitActivity;
-import com.exercise.tiger.mylearnapplication.testRetrofit.activity.TestRvWithRetrofitActivity;
-import com.exercise.tiger.mylearnapplication.testRxJava.activity.TestRxJavaActivity;
+import com.exercise.tiger.mylearnapplication.activity.TestGlideActivity;
+import com.exercise.tiger.mylearnapplication.activity.TestRetrofitActivity;
+import com.exercise.tiger.mylearnapplication.activity.TestRvWithRetrofitActivity;
+import com.exercise.tiger.mylearnapplication.activity.TestRxJavaActivity;
+import com.exercise.tiger.mylearnapplication.activity.TestScrollImageActivity;
 import com.exercise.tiger.mylearnapplication.utils.AppToast;
-import com.exercise.tiger.mylearnapplication.utils.FormatUtils;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,6 +32,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         retrofitBtn.setOnClickListener(this);
         Button rvBtn = (Button) findViewById(R.id.btn_goto_rv_test);
         rvBtn.setOnClickListener(this);
+        Button btnGlide = (Button) findViewById(R.id.btn_glide);
+        btnGlide.setOnClickListener(this);
+        Button btnScroll = (Button) findViewById(R.id.btn_scroll);
+        btnScroll.setOnClickListener(this);
+        Button btnRxandroid = (Button) findViewById(R.id.btn_rxandroid);
+        btnRxandroid.setOnClickListener(this);
     }
 
     @Override
@@ -38,6 +52,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_goto_rv_test:
                 TestRvWithRetrofitActivity.startActivityByIntent(this);
+                break;
+            case R.id.btn_glide:
+                TestGlideActivity.startActivityByIntent(this);
+                break;
+            case R.id.btn_scroll:
+                TestScrollImageActivity.startActivityByIntent(this);
+                break;
+            case R.id.btn_rxandroid:
+                Observable<String> observable = new Observable<String>() {
+                    @Override
+                    protected void subscribeActual(Observer<? super String> observer) {
+                        String s = "hahaha";
+                        observer.onNext(s);
+                    }
+                };
+                Observer<String> observer = new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        AppToast.showLongText(MainActivity.this,s);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                };
+                observable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
                 break;
             default:
                 break;

@@ -1,18 +1,10 @@
 package com.exercise.tiger.mylearnapplication.network;
 
-import com.exercise.tiger.mylearnapplication.testRetrofit.bean.AddrsBean;
-import com.exercise.tiger.mylearnapplication.testRetrofit.bean.QueryDouBanMovieTopResult;
-import com.exercise.tiger.mylearnapplication.utils.Constants;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.exercise.tiger.mylearnapplication.bean.AddrsBean;
+import com.exercise.tiger.mylearnapplication.bean.QueryDouBanMovieTopResult;
 
 import io.reactivex.Observable;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;

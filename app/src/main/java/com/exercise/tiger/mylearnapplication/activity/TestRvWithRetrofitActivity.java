@@ -1,4 +1,4 @@
-package com.exercise.tiger.mylearnapplication.testRetrofit.activity;
+package com.exercise.tiger.mylearnapplication.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import com.exercise.tiger.mylearnapplication.base.BaseActivity;
 import com.exercise.tiger.mylearnapplication.customview.PullUpLoadMoreListener;
 import com.exercise.tiger.mylearnapplication.network.RetrofitFactory;
 import com.exercise.tiger.mylearnapplication.network.RetrofitRequestService;
-import com.exercise.tiger.mylearnapplication.testRetrofit.TestRetrofitAdapter;
-import com.exercise.tiger.mylearnapplication.testRetrofit.bean.MovieBrief;
-import com.exercise.tiger.mylearnapplication.testRetrofit.bean.QueryDouBanMovieTopResult;
+import com.exercise.tiger.mylearnapplication.adapter.TestRetrofitAdapter;
+import com.exercise.tiger.mylearnapplication.bean.MovieBrief;
+import com.exercise.tiger.mylearnapplication.bean.QueryDouBanMovieTopResult;
 import com.exercise.tiger.mylearnapplication.utils.ActivityUtils;
 import com.exercise.tiger.mylearnapplication.utils.AppToast;
 

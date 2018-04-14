@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="com.exercise.tiger.mylearnapplication.MainActivity">
 
@@ -11,12 +11,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+
     <Button
         android:id="@+id/btn_goto_retrofit_test"
         style="@style/NormalBtnStyle"
-        android:text="@string/retrofit"/>
+        android:text="@string/retrofit" />
+
     <Button
         android:id="@+id/btn_goto_rv_test"
         style="@style/NormalBtnStyle"
-        android:text="@string/rv"/>
+        android:text="@string/rv" />
+
+    <Button
+        android:id="@+id/btn_glide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="glide" />
+    <Button
+        android:id="@+id/btn_scroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="scroll" />
+    <Button
+        android:id="@+id/btn_rxandroid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="rx" />
 </LinearLayout>
