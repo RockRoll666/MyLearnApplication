@@ -18,28 +18,32 @@ import java.io.InputStream;
  * 查看大图页面
  * create by hzj on 2018/4/14
  **/
-public class TestLargeImageActivity extends BaseActivity {
-    private LargeImageView livTest;
+public class TestGestureImageActivity extends BaseActivity {
+    private GestureImageView givTest;
 
     public static void startActivityByIntent(Context from){
-        Intent intent = new Intent(from,TestLargeImageActivity.class);
+        Intent intent = new Intent(from,TestGestureImageActivity.class);
         from.startActivity(intent);
     }
     @Override
     protected void initView() {
-        livTest = $(R.id.liv_test);
+        givTest = $(R.id.giv_test);
     }
 
     @Override
     protected int getLayoutID() {
-        return R.layout.activity_large_image;
+        return R.layout.activity_gesture_image;
     }
 
     @Override
     protected void initData() {
         try {
             InputStream jpgIs = getAssets().open("big.jpg");
-            livTest.setInputStream(jpgIs);
+            Bitmap bp = BitmapFactory.decodeStream(jpgIs);
+            if (null != jpgIs){
+                jpgIs.close();
+            }
+            givTest.setImageBitmap(bp);
         } catch (IOException e) {
             e.printStackTrace();
         }

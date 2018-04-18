@@ -32,5 +32,6 @@
         <activity android:name=".activity.TestGlideActivity"/>
         <activity android:name=".activity.TestLargeImageActivity"/>
         <activity android:name=".activity.TestScrollImageActivity"/>
+        <activity android:name=".activity.TestGestureImageActivity"/>
     </application>
 </manifest>

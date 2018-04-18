@@ -24,6 +24,7 @@ import java.io.InputStream;
 public class TestGlideActivity extends BaseActivity {
     private ImageView ivWhole;
     private ImageView ivLittle;
+    private ImageView ivGesture;
 
     public static void startActivityByIntent(Context from){
         Intent intent = new Intent(from,TestGlideActivity.class);
@@ -40,6 +41,13 @@ public class TestGlideActivity extends BaseActivity {
             }
         });
         ivLittle = $(R.id.iv_little);
+        ivGesture = $(R.id.iv_gesture);
+        ivGesture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TestGestureImageActivity.startActivityByIntent(TestGlideActivity.this);
+            }
+        });
     }
 
     @Override
@@ -50,6 +58,7 @@ public class TestGlideActivity extends BaseActivity {
     @Override
     protected void initData() {
         Glide.with(this).load("file:///android_asset/big.jpg").into(ivWhole);
+        Glide.with(this).load("file:///android_asset/big.jpg").into(ivGesture);
         try {
             InputStream jpgIs = getAssets().open("big.jpg");
             //获得图片宽高
