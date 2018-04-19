@@ -28,7 +28,7 @@ public class GestureImageView extends AppCompatImageView implements ViewTreeObse
     private static int mWidth = GlobalConstant.getDeviceWidth();
     private static int mHeight = GlobalConstant.getDeviceHeight();
     private static int mDistance = (int) Math.sqrt((Math.pow(mWidth, 2) + Math.pow(mHeight, 2)));
-    private final float MAX_SCALE = 4.0f; // 修改这个值可以修改缩放最大值
+    private float MAX_SCALE = 4.0f; // 修改这个值可以修改缩放最大值
     private float MIN_SCALE;
     private float[] mMatrixValues = new float[9];
     private float[] initMatrixValues = new float[9];
@@ -101,7 +101,6 @@ public class GestureImageView extends AppCompatImageView implements ViewTreeObse
         super.setImageBitmap(bm);
         adjustImageMatrix();
     }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -294,8 +293,8 @@ public class GestureImageView extends AppCompatImageView implements ViewTreeObse
      * @param f     包含缩放中心点的PointF
      */
     private void scale(float scale, PointF f) {
-        Log.d("缩放的比率：scale", scale+"");
-        if (scale<=(float)1.00) {
+        Log.d("缩放的比率：scale", scale + "");
+        if (scale <= (float) 1.00) {
 //            scale=(float) 1.00;
         }
         Matrix matrix = new Matrix(mMatrix);
@@ -308,8 +307,26 @@ public class GestureImageView extends AppCompatImageView implements ViewTreeObse
         }
         Log.d(TAG, "currentScale = " + currentScale);
         setImageMatrix(mMatrix);
-    }
 
+        //对缩放完成后的黑边处理，如果当前图片宽度或高度大于屏幕，则不留黑边，否则在两端留下相同宽度的黑边
+        RectF imgRect = getImageRectF();
+        float translateX = 0f;
+        float translateY = 0f;
+        if (imgRect.width() > mWidth) {
+            translateX = (imgRect.left > 0 ? -imgRect.left : imgRect.right < mWidth ? mWidth - imgRect.right : 0f)/2;
+        }else {
+            translateX = (mWidth - imgRect.right -imgRect.left) /2;
+        }
+
+        if (imgRect.height() > mHeight){
+            translateY = (imgRect.top > 0 ? -imgRect.top : imgRect.bottom < mHeight ? mHeight - imgRect.bottom : 0f)/2;
+        }else {
+            translateY = (mHeight - imgRect.bottom - imgRect.top)/2;
+        }
+
+        mMatrix.postTranslate(translateX,translateY);
+        setImageMatrix(mMatrix);
+    }
 
     /**
      * 将图像调整到适合的位置
@@ -323,16 +340,28 @@ public class GestureImageView extends AppCompatImageView implements ViewTreeObse
         int width = d.getIntrinsicWidth();
         int height = d.getIntrinsicHeight();
         float scale = 1.0f;
-        // 有3种情况，1、宽大于屏幕宽。2、高大于屏幕高。3、宽和高均大于屏幕，图像宽高均小于设备的暂时不考虑
-        if (width > mWidth && height < mHeight) {
+        // 为了图片完全显示，判断加载图片与屏幕的宽高比，如果图片的大，则按照图片与屏幕的宽度比例得到初始缩放比例，反之按照高度的比例得到初始缩放
+        float imgRatio = width * 1.0f / height;
+        float screenRatio = mWidth * 1.0f / mHeight;
+        if (imgRatio > screenRatio) {
             scale = mWidth * 1.0f / width;
-        }
-        if (height > mHeight && width < mWidth) {
+        } else {
             scale = mHeight * 1.0f / height;
         }
-        if (height > mHeight && width > mWidth) {
-            scale = Math.min(mWidth * 1.0f / width, mHeight * 1.0f / height);
+        if (scale > 1) {
+            MAX_SCALE = scale * 2;
+        } else {
+            MAX_SCALE = 4.0f;
         }
+//        if (width > mWidth && height < mHeight) {
+//            scale = mWidth * 1.0f / width;
+//        }
+//        if (height > mHeight && width < mWidth) {
+//            scale = mHeight * 1.0f / height;
+//        }
+//        if (height > mHeight && width > mWidth) {
+//            scale = Math.min(mWidth * 1.0f / width, mHeight * 1.0f / height);
+//        }
         currentScale = scale;
         MIN_SCALE = scale;
         mMatrix = new Matrix();
