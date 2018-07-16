@@ -41,7 +41,7 @@ import retrofit2.Retrofit;
 public class TestRvWithRetrofitActivity extends BaseActivity {
     private TestRetrofitAdapter adapter;
     private int index = 0;
-    private int pageSize = 20;
+    private int pageSize = 30;
     private List<MovieBrief> movieBriefs;
     public static void startActivityByIntent(Context from){
         ActivityUtils.startNewActivity(from,TestRvWithRetrofitActivity.class);
